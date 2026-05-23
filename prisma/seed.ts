@@ -23,7 +23,7 @@ async function main() {
     create: {
       id: "seed-project",
       name: "Internal Platform",
-      description: "Contoh project seed untuk demo REST API perusahaan.",
+      description: "Seed project for the enterprise REST API demo.",
       status: "ACTIVE",
       ownerId: admin.id
     }
