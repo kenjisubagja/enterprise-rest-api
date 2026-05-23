@@ -47,7 +47,7 @@ enterprise-rest-api/
 ## Setup
 
 ```bash
-cd /home/kenjisubagja/Documents/gawean/enterprise-rest-api
+cd enterprise-rest-api
 cp .env.example .env
 npm install
 docker compose up -d
@@ -56,14 +56,13 @@ npm run db:seed
 npm run dev
 ```
 
-Server jalan di:
 Server runs at:
 
 ```text
 http://localhost:3000
 ```
 
-## Seed Account
+## Seed Account Default
 
 ```text
 email: admin@example.com
@@ -196,15 +195,3 @@ This project is safe enough as a learning/demo API baseline, but it should not b
 
 Before real production use, add rate limiting, refresh token rotation, stricter CORS, request logging/monitoring, automated security tests, API abuse protection, and deployment-specific secret management.
 
-## Production Notes
-
-Common additions before production:
-
-- Refresh token rotation
-- Email verification
-- Password reset flow
-- Rate limiting
-- Centralized observability
-- CI/CD migration deploy
-- Integration tests with a test database
-- OpenAPI UI such as Swagger UI or Scalar
