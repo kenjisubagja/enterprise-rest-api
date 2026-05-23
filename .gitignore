@@ -5,4 +5,4 @@ coverage
 .env
 *.log
 .playwright-cli-*
-prisma/migrations
+tsconfig.tsbuildinfo

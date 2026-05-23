@@ -68,6 +68,52 @@ export async function GET() {
           }
         }
       },
+      "/auth/forgot-password": {
+        post: {
+          tags: ["Auth"],
+          summary: "Request a password reset token",
+          description:
+            "Returns a generic message to prevent email enumeration. In this demo, the reset token can be returned when SHOW_RESET_TOKEN_IN_RESPONSE=true.",
+          security: [],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/ForgotPasswordRequest" },
+                example: {
+                  email: "admin@example.com"
+                }
+              }
+            }
+          },
+          responses: {
+            "200": { description: "Password reset request accepted" }
+          }
+        }
+      },
+      "/auth/reset-password": {
+        post: {
+          tags: ["Auth"],
+          summary: "Reset password with a reset token",
+          security: [],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/ResetPasswordRequest" },
+                example: {
+                  token: "paste-reset-token-here",
+                  password: "NewPassword123!"
+                }
+              }
+            }
+          },
+          responses: {
+            "200": { description: "Password reset successfully" },
+            "400": { description: "Invalid or expired reset token" }
+          }
+        }
+      },
       "/auth/me": {
         get: {
           tags: ["Auth"],
@@ -226,7 +272,22 @@ export async function GET() {
         },
         ProjectStatus: {
           type: "string",
-          enum: ["PLANNING", "ACTIVE", "ON_HOLD", "DONE", "ARCHIVED"]
+          enum: ["PLANNING", "ACTIVE", "PAUSED", "DONE"]
+        },
+        ForgotPasswordRequest: {
+          type: "object",
+          required: ["email"],
+          properties: {
+            email: { type: "string", format: "email" }
+          }
+        },
+        ResetPasswordRequest: {
+          type: "object",
+          required: ["token", "password"],
+          properties: {
+            token: { type: "string" },
+            password: { type: "string", minLength: 8, maxLength: 128 }
+          }
         },
         UpdateUserRequest: {
           type: "object",
